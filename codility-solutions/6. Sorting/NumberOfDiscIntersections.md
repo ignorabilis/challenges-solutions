@@ -11,6 +11,7 @@ The figure below shows discs drawn for N = 6 and A as follows:
     A[4] = 4
     A[5] = 0
 
+![disc intersections image](disc-intersections-1.png)
 
 There are eleven (unordered) pairs of discs that intersect, namely:
 
