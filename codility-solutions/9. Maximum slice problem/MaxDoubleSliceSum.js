@@ -1,6 +1,43 @@
+// Time complexity: O(N);
+// Space complexity: O(3N) = O(N);
 function solution(A) {
-    let n = A.length
-    maxEnding = 0,
+    let n = A.length,
+        dsEnd = n - 1,
+        lrSlices = [0],
+        rlSlices = [0],
+        lrSlice = 0,
+        rlSlice = 0;
+
+    // the first and the last element are always excluded
+    for (let i = 1; i < dsEnd; i++) {
+        lrSlice = Math.max(0, lrSlice + A[i]);
+        lrSlices[i] = lrSlice;
+        rlSlice = Math.max(0, rlSlice + A[dsEnd - i]);
+        rlSlices[dsEnd - i] = rlSlice;
+    }
+
+    // pad with zeroes - Y might be right next to X or Z
+    // like this:  [(skip 1) 2 3 -5]
+    // or [1 2 3 (skip -5)]
+    lrSlices.push(0);
+    rlSlices.push(0);
+    let maxDoubleSlice = 0;
+    for (let i = 0; i < lrSlices.length - 2; i++) {
+        let lrs = lrSlices[i],
+            rls = rlSlices[i + 2];
+
+        maxDoubleSlice = Math.max(maxDoubleSlice, lrs + rls);
+    }
+
+    return maxDoubleSlice;
+}
+
+// This below will never pass with 100%
+// because finding the maxSlice and then excluding the min value
+// may only work well if all the numbers were positive or 0
+function solutionNotWorking(A) {
+    let n = A.length,
+        maxEnding = 0,
         maxSlice = 0,
         start = 1,
         end = 1,
