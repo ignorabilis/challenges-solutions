@@ -51,7 +51,7 @@ function solution(A) {
 // no need for prefix sums - just remember the id of each peak
 // and then based on that id find in which block it is
 // Also there is an error which I cannot find
-// and because of it one of the perf tests fails
+// and because of it one of the perf tests fails (returns a wrong value)
 // Time complexity (according to codility): O(N * log(log(N)))
 // TODO - only 90% (one perf test fails)
 function calcPeaks(A, n) {
