@@ -45,15 +45,14 @@ function solution(A) {
 }
 
 
-// OVERLY COMPLICATED - no need to use prev/next in calcPeaks,
+// OVERLY COMPLICATED
+// Only 90% - one perf test fails (returns a wrong value)
+// Time complexity (according to codility): O(N * log(log(N)))
+// no need to use prev/next in calcPeaks,
 // just use i - 1 and i + 1; no need to explicitly calc all divs,
 // just check those on the fly;
 // no need for prefix sums - just remember the id of each peak
 // and then based on that id find in which block it is
-// Also there is an error which I cannot find
-// and because of it one of the perf tests fails (returns a wrong value)
-// Time complexity (according to codility): O(N * log(log(N)))
-// TODO - only 90% (one perf test fails)
 function calcPeaks(A, n) {
     // skip the first element as it cannot be a peak
     let peaks = [0],
