@@ -4,10 +4,27 @@ function gcd(a, b) {
         return b;
     }
     else {
-        gcd(b, rem)
+        return gcd(b, rem)
     }
 }
 
+// use the fact that the gcd of A & B
+// can be used to generate new gcd with A & B,
+// thus possibly reducing A & B to 1 or some
+// other number
+function remPrimes(n, gcdAB) {
+    let gcdN = gcd(n, gcdAB);
+
+    while (gcdN != 1){
+        n /= gcdN;
+        gcdN = gcd(n, gcdN);
+    }
+
+    return n;
+}
+
+// Time complexity (according to codility):
+// O(Z * log(max(A) + max(B))**2)
 function solution(A, B) {
     let n = A.length,
         count = 0;
@@ -20,16 +37,16 @@ function solution(A, B) {
         }
         else {
             let gcdAB = gcd(a, b),
-                remA = a / gcdAB,
-                remB = b / gcdAB,
-                gcdRemA = gcd(a, remB),
-                gcdRemB = gcd(b, remA);
+                remA = remPrimes(a, gcdAB),
+                remB = remPrimes(b, gcdAB);
+
+            if (remA === 1 && remB === 1) {
+                count++;
+            }
         }
     }
-}
 
-function findPrimes() {
-
+    return count;
 }
 
 // Only 92% - one perf test fails (times out)
@@ -52,7 +69,7 @@ function commonPrimes(A, B) {
                 let remA = a % j,
                     remB = b % j;
                 if (remA === 0 && remB === 0) {
-                    // divide by j do otkat
+                    // divide by j as much as possible
                     while (a % j === 0) {
                         a /= j;
                     }
